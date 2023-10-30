@@ -1,11 +1,28 @@
 import styled from "styled-components";
+import Button from "../Button/button";
+import { useState } from "react";
 
-const Home = ({name}) => {
+const Home = ({name, munros}) => {
+
+    const [randomMunro, setRandomMunro] = useState('')
+
+    const randomMunroSelector = () => {
+        const randomIndex = Math.floor(Math.random() * munros.length)
+        return munros[randomIndex].name
+    }
+
+    const handleButtonClick = () => {
+        console.log("button clicked")
+        setRandomMunro(randomMunroSelector)
+    }
+
     return (
         <Wrapper>
-            <Title>
-                Hello {name}.  Welcome home.
-            </Title>
+            <Title>Hello {name}. Welcome home.</Title>
+            <Paragraph>Is your favourite munro {randomMunroSelector()}?
+                <p><Button label="No?" onClick={handleButtonClick} /></p>
+            </Paragraph>
+            {randomMunro && <Paragraph>How about {randomMunro} instead?</Paragraph>} 
         </Wrapper>
 
     )
@@ -18,7 +35,11 @@ const Title = styled.h1`
     text-align: center;
     color: #BF4F74;
     `
-
+const Paragraph = styled.div`
+    font-size: 1.5em;
+    text-align: center;
+    color: #BF4F74;
+    `
 const Wrapper = styled.section`
     padding: 1em;
     background: papayawhip`

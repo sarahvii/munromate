@@ -3,27 +3,33 @@ import styled from "styled-components";
 const MunroList = ({munros}) => {
     return (
         <Wrapper>
-            <Paragraph>
-                One munro is {munros[0].name} which is near {munros[0].near}
-            </Paragraph>
-            <Paragraph>
-                Another is {munros[1].name} which is {munros[1].height}m high.
-            </Paragraph>
-        </Wrapper>
+        <Title>Munro List</Title>
+            <List>
+            {munros.map((munro, index) => (
+                <ListItem key={index}>{munro.name} ({munro.height}m) - near {munro.near}</ListItem>
+            ))}
+        </List>
+      </Wrapper>
 
     )
 }
 
-// random munro
-
 export default MunroList;
 
-const Paragraph = styled.p`
-    font-size: 1.5em;
-    text-align: center;
-    color: #BF4F74;
-    `
+const Wrapper = styled.div`
+  padding: 1em;
+  text-align: center;
+`;
 
-const Wrapper = styled.section`
-    padding: 1em;
-    background: papayawhip`
+const Title = styled.h2`
+  color: #333;
+`;
+
+const List = styled.ul`
+  list-style-type: none;
+  padding: 0;
+`;
+
+const ListItem = styled.li`
+  margin: 1em 0;
+`;
