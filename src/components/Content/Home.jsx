@@ -2,33 +2,15 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Button from "../Button/button";
 import Greeting from "./Greeting";
+import RandomMunro from "./RandomMunro";
 
 
 const Home = ({name, munros}) => {
 
-    const [randomMunro, setRandomMunro] = useState('')
-
-    useEffect(() => {
-        setRandomMunro(randomMunroSelector());
-      }, []);
-
-    const randomMunroSelector = () => {
-        const randomIndex = Math.floor(Math.random() * munros.length)
-        return munros[randomIndex].name
-    }
-
-    const handleButtonClick = () => {
-        console.log("button clicked")
-        setRandomMunro(randomMunroSelector)
-    }
-
     return (
         <Wrapper>
             <Greeting name={name}/>
-            <Paragraph>Is your favourite munro {randomMunro}?
-                <p><Button label="No?" onClick={handleButtonClick} /></p>
-            </Paragraph>
-            {randomMunro && <Paragraph>How about {randomMunro} instead?</Paragraph>} 
+            <RandomMunro munros={munros}/>
         </Wrapper>
 
     )
@@ -39,11 +21,7 @@ const Home = ({name, munros}) => {
 export default Home;
 
 
-const Paragraph = styled.div`
-    font-size: 1.5em;
-    text-align: center;
-    color: #BF4F74;
-    `
-const Wrapper = styled.section`
+
+const Wrapper = styled.div`
     padding: 1em;
     background: papayawhip`
