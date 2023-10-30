@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Button from "../Button/button";
-import MunroDetails from "./MunroDetails";
+import MunroSummary from "./MunroSummary";
 
 const MunroItem = ({ munro, onClick, onAddToHike, showAddToHikeButton = false }) => {
 
@@ -12,7 +12,7 @@ const MunroItem = ({ munro, onClick, onAddToHike, showAddToHikeButton = false })
   return (
     <>
     <ListItem onClick={() => onClick(munro)}>
-      <MunroDetails munro={munro} />
+      <MunroSummary munro={munro} />
       {showAddToHikeButton && <Button onClick={handleButtonClick} label="Add to hike list" />}
     </ListItem>
     </>

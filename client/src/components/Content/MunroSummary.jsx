@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const MunroDetails = ({ munro }) => (
+const MunroSummary = ({ munro }) => (
   <Details>
     {munro.name} ({munro.height}m) - near {munro.near}
   </Details>
@@ -11,4 +11,4 @@ const Details = styled.span`
     text-align: center;
     `;
 
-export default MunroDetails;
+export default MunroSummary;
