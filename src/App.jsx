@@ -8,14 +8,6 @@ import { Helmet } from "react-helmet"
 import { createGlobalStyle } from "styled-components"
 
 
-
-const GlobalStyles = createGlobalStyle`
-  body {
-    font-family: 'Roboto', sans-serif;
-  }
-`;
-
-
 const App = () => {
   const name = "hiker"
 
@@ -61,3 +53,9 @@ const App = () => {
 }
 
 export default App
+
+const GlobalStyles = createGlobalStyle`
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
+`;

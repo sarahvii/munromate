@@ -37,7 +37,7 @@ const MunroList = ({munros, onAddToHike}) => {
                 <MunroItem key={munro.id} munro={munro} onClick={handleMunroClick} onAddToHike={onAddToHike}/>
             ))}
         </List>
-        {selectedMunro && <MunroDetail munro={selectedMunro} />}
+        {selectedMunro && <MunroDetail munro={selectedMunro} onAddToHike={onAddToHike} />}
       </Wrapper>
 
     )
