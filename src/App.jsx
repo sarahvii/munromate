@@ -1,9 +1,11 @@
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar"
 import Home from "./components/Content/Home"
 import MunroList from "./components/Content/MunroList"
+import ToHikeList from "./components/Content/ToHikeList"
 import { Helmet } from "react-helmet"
 import { createGlobalStyle } from "styled-components"
-import ToHikeList from "./components/Content/ToHikeList"
+
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -31,16 +33,18 @@ const App = () => {
   ]
 
   return (
-    <div>
+    <Router>
       <Helmet>
         <link href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel="stylesheet" />;
       </Helmet>
       <GlobalStyles />
       <NavBar />
-      <Home name={name} munros={munros}/>
-      <MunroList munros={munros} />
-      <ToHikeList munros={munros}/>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home name={name} munros={munros} />} />
+        <Route path="/munros" element={<MunroList munros={munros} />} />
+        <Route path="/tohikelist" element={<ToHikeList munros={munros} />} />
+      </Routes>
+    </Router>
   )
 }
 
