@@ -3,11 +3,13 @@ import Button from "../Button/button";
 import { useState, useEffect } from "react";
 
 const RandomMunro = ({ munros }) => {
-  const [randomMunro, setRandomMunro] = useState("");
+  const [randomMunro, setRandomMunro] = useState(null);
 
   useEffect(() => {
-    setRandomMunro(randomMunroSelector());
-  }, []);
+    if (munros.length > 0) {
+      setRandomMunro(randomMunroSelector());
+    }
+  }, [munros]);
 
   const randomMunroSelector = () => {
     const randomIndex = Math.floor(Math.random() * munros.length);
@@ -15,7 +17,7 @@ const RandomMunro = ({ munros }) => {
   };
 
   const handleButtonClick = () => {
-    setRandomMunro(randomMunroSelector);
+    setRandomMunro(randomMunroSelector());
   };
 
   return (

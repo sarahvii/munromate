@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import NavBar from "./components/NavBar/NavBar"
 import Home from "./components/Content/Home"
 import MunroList from "./components/Content/MunroList"
@@ -10,24 +11,7 @@ import { createGlobalStyle } from "styled-components"
 
 const App = () => {
   const name = "hiker"
-
-  const munros = [
-    {
-      id: 1,
-      name: 'Ben Nevis',
-      height: 219,
-      near: 'Oban',
-      description: 'blah blah blah blah blah blah blah'
-    },
-    {
-      id: 2,
-      name: 'Arthurs Seat',
-      height: 20,
-      near: 'Edinburgh',
-      description: `When I move there I'll go up it at least once a month`
-    }
-  ]
-
+  const [munros, setMunros] = useState([])
   const [munrosToHike, setMunrosToHike] = useState([])
 
   const addMunroToHike = (newMunro) => {
@@ -37,6 +21,17 @@ const App = () => {
         window.alert(`${newMunro.name} is already in your to hike list!`)
       }
   }
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/munros')
+      .then(response => {
+        console.log("promise fulfilled")
+        setMunros(response.data)
+      })
+  }, [])
+  console.log('render', munros.length, 'munros')
 
   return (
     <Router>
