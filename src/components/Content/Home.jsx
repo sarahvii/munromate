@@ -32,6 +32,8 @@ const Home = ({name, munros}) => {
     )
 }
 
+// hike to the moon
+
 export default Home;
 
 const Title = styled.h1`
