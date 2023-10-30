@@ -1,21 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import MunroDetail from "./MunroDetail";
 import Button from "../Button/button";
 
 const ToHikeList = ({munros, onAddToHike}) => {
-    const [selectedMunro, setSelectedMunro] = useState(null)
+    const [munrosToHike, setMunrosInList] = useState(munros)
+    const [searchTerm, setSearchTerm] = useState('')
+    const [selectedMunro, setSelectedMunro] = useState(null);
 
-    const handleMunroClick = (munro) => {
-        setSelectedMunro(munro)
+    useEffect(() => {
+        const filteredMunros = munros.filter(munro =>
+            munro.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    setMunrosInList(filteredMunros)
+    }, [searchTerm, munros])
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value)
     }
 
+    const handleMunroClick = (munro) => {
+        setSelectedMunro(munro);
+      };
 
     return (
         <Wrapper>
         <Title>Munros I want to hike</Title>
+        <div>
+            Search my to hike list <input value={searchTerm} onChange={handleSearchChange} />
+        </div>
             <List>
-            {munros.map(munro => (
+            {munrosToHike.map(munro => (
                 <ListItem key={munro.id} onClick={() => handleMunroClick(munro)}>
                 {munro.name} ({munro.height}m) - near {munro.near}
                 <Button onClick={() => onAddToHike(munro)} label="Add to hike list"/>

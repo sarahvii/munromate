@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import Button from '../Button/button';
 
-const MunroDetail = ({ munro, onAddToHike }) => {
+const MunroDetail = ({ munro, onAddToHike, showAddToHikeButton=false }) => {
     const handleAddToHike = () => {
         onAddToHike(munro)
     }
-
 
   return (
     <Wrapper>
@@ -13,7 +12,9 @@ const MunroDetail = ({ munro, onAddToHike }) => {
       <p>Height: {munro.height} meters</p>
       <p>Near: {munro.near}</p>
       <p>Description: {munro.description}</p>
+      {showAddToHikeButton &&
       <Button onClick={handleAddToHike} label="Add to hike list"/>
+}
     </Wrapper>
   );
 };
