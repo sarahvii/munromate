@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Munro from "./Munro";
+import Munro from "./MunroItem";
 
 const ToHikeList = ({munros}) => {
     return (

@@ -22,13 +22,15 @@ const App = () => {
       id: 1,
       name: 'Ben Nevis',
       height: 219,
-      near: 'Oban'
+      near: 'Oban',
+      description: 'blah blah blah blah blah blah blah'
     },
     {
       id: 2,
       name: 'Arthurs Seat',
       height: 20,
-      near: 'Edinburgh'
+      near: 'Edinburgh',
+      description: `When I move there I'll go up it at least once a month`
     }
   ]
 

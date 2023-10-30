@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Munro from "./Munro";
+import MunroItem from "./MunroItem";
+import MunroDetail from './MunroDetail';
 
 
 const MunroList = ({munros}) => {
     const [munrosInList, setMunrosInList] = useState(munros)
     const [searchTerm, setSearchTerm] = useState('')
+    const [selectedMunro, setSelectedMunro] = useState(null);
 
     useEffect(() => {
         const filteredMunros = munros.filter(munro =>
@@ -18,6 +20,10 @@ const MunroList = ({munros}) => {
         setSearchTerm(event.target.value)
     }
 
+    const handleMunroClick = (munro) => {
+        setSelectedMunro(munro);
+      };
+
     return (
         <Wrapper>
         <Title>Munro List</Title>
@@ -28,9 +34,10 @@ const MunroList = ({munros}) => {
         </div>
             <List>
             {munrosInList.map(munro => (
-                <Munro key={munro.id} munro={munro} />
+                <MunroItem key={munro.id} munro={munro} onClick={handleMunroClick} />
             ))}
         </List>
+        {selectedMunro && <MunroDetail munro={selectedMunro} />}
       </Wrapper>
 
     )
@@ -50,8 +57,4 @@ const Title = styled.h2`
 const List = styled.ul`
   list-style-type: none;
   padding: 0;
-`;
-
-const ListItem = styled.li`
-  margin: 1em 0;
 `;
