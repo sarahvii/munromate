@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Button from "../Button/button";
-import { useState, useEffect } from "react";
+import Greeting from "./Greeting";
+
 
 const Home = ({name, munros}) => {
 
@@ -22,7 +24,7 @@ const Home = ({name, munros}) => {
 
     return (
         <Wrapper>
-            <Title>Hello {name}. Welcome home.</Title>
+            <Greeting name={name}/>
             <Paragraph>Is your favourite munro {randomMunro}?
                 <p><Button label="No?" onClick={handleButtonClick} /></p>
             </Paragraph>
@@ -36,11 +38,7 @@ const Home = ({name, munros}) => {
 
 export default Home;
 
-const Title = styled.h1`
-    font-size: 1.5em;
-    text-align: center;
-    color: #BF4F74;
-    `
+
 const Paragraph = styled.div`
     font-size: 1.5em;
     text-align: center;
