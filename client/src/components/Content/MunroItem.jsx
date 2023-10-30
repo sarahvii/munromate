@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "../Button/button";
 import MunroDetails from "./MunroDetails";
 
-const MunroItem = ({ munro, onClick, onAddToHike }) => {
+const MunroItem = ({ munro, onClick, onAddToHike, showAddToHikeButton = false }) => {
 
   const handleButtonClick = (event) => {
     event.stopPropagation();
@@ -13,7 +13,7 @@ const MunroItem = ({ munro, onClick, onAddToHike }) => {
     <>
     <ListItem onClick={() => onClick(munro)}>
       <MunroDetails munro={munro} />
-      <Button onClick={handleButtonClick} label="Add to hike list" />
+      {showAddToHikeButton && <Button onClick={handleButtonClick} label="Add to hike list" />}
     </ListItem>
     </>
   );

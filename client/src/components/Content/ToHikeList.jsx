@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import MunroDetail from "./MunroDetail";
+import MunroItem from "./MunroItem";
 import Button from "../Button/button";
+import SearchBar from "./SearchBar";
 
 const ToHikeList = ({munros, onAddToHike}) => {
     const [munrosToHike, setMunrosInList] = useState(munros)
@@ -26,15 +28,14 @@ const ToHikeList = ({munros, onAddToHike}) => {
     return (
         <Wrapper>
         <Title>Munros I want to hike</Title>
-        <div>
-            Search my to hike list <input value={searchTerm} onChange={handleSearchChange} />
-        </div>
+        <SearchBar value={searchTerm} onChange={handleSearchChange} />
             <List>
             {munrosToHike.map(munro => (
-                <ListItem key={munro.id} onClick={() => handleMunroClick(munro)}>
-                {munro.name} ({munro.height}m) - near {munro.near}
-                <Button onClick={() => onAddToHike(munro)} label="Add to hike list // change to favourites // hiked"/>
-                </ListItem>
+                <MunroItem
+                  key={munro.id}
+                  munro={munro}
+                  onClick={handleMunroClick}
+                />
             ))}
             </List>
         {selectedMunro && <MunroDetail munro={selectedMunro} onAddToHike={onAddToHike} />}

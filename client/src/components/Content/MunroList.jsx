@@ -31,7 +31,12 @@ const MunroList = ({munros, onAddToHike}) => {
         <SearchBar value={searchTerm} onChange={handleSearchChange} />
             <List>
             {munrosInList.map(munro => (
-                <MunroItem key={munro.id} munro={munro} onClick={handleMunroClick} onAddToHike={onAddToHike}/>
+                <MunroItem 
+                  key={munro.id} 
+                  munro={munro} 
+                  onClick={handleMunroClick} 
+                  onAddToHike={onAddToHike}
+                  showAddToHikeButton={true}/>
             ))}
         </List>
         {selectedMunro && <MunroDetail munro={selectedMunro} onAddToHike={onAddToHike} showAddToHikeButton={true}/>}
