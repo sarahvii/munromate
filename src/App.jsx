@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
 import NavBar from "./components/NavBar/NavBar"
 import Home from "./components/Content/Home"
 import MunroList from "./components/Content/MunroList"
 import ToHikeList from "./components/Content/ToHikeList"
 import { Helmet } from "react-helmet"
 import { createGlobalStyle } from "styled-components"
+
 
 
 const GlobalStyles = createGlobalStyle`
@@ -34,6 +36,14 @@ const App = () => {
     }
   ]
 
+  const [munrosToHike, setMunrosToHike] = useState([])
+
+  const addMunroToHike = (newMunro) => {
+      if (!munrosToHike.some(munro => munro.id === newMunro.id)) {
+          setMunrosToHike([...munrosToHike, newMunro])
+      }
+  }
+
   return (
     <Router>
       <Helmet>
@@ -43,8 +53,8 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home name={name} munros={munros} />} />
-        <Route path="/munros" element={<MunroList munros={munros} />} />
-        <Route path="/tohikelist" element={<ToHikeList munros={munros} />} />
+        <Route path="/munros" element={<MunroList munros={munros} onAddToHike={addMunroToHike}/>} />
+        <Route path="/tohikelist" element={<ToHikeList munros={munrosToHike} />} />
       </Routes>
     </Router>
   )

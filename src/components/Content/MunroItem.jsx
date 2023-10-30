@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import Button from "../Button/button";
 
-const MunroItem = ({ munro, onClick }) => {
+const MunroItem = ({ munro, onClick, onAddToHike }) => {
   return (
+    <>
     <ListItem onClick={() => onClick(munro)}>
       {munro.name} ({munro.height}m) - near {munro.near}
+      <Button onClick={() => onAddToHike(munro)} label="Add to hike list"/>
     </ListItem>
+    </>
   );
 };
 

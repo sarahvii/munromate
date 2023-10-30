@@ -1,15 +1,16 @@
 import styled from "styled-components";
-import Munro from "./MunroItem";
 
 const ToHikeList = ({munros}) => {
     return (
         <Wrapper>
         <Title>Munros I want to hike</Title>
             <List>
-            {munros.map((munro) => (
-                <Munro key={munro.id} munro={munro} />
+            {munros.map(munro => (
+                <ListItem key={munro.id}>
+                {munro.name} ({munro.height}m) - near {munro.near}
+                </ListItem>
             ))}
-        </List>
+            </List>
       </Wrapper>
 
     )

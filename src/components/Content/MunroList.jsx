@@ -4,7 +4,7 @@ import MunroItem from "./MunroItem";
 import MunroDetail from './MunroDetail';
 
 
-const MunroList = ({munros}) => {
+const MunroList = ({munros, onAddToHike}) => {
     const [munrosInList, setMunrosInList] = useState(munros)
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedMunro, setSelectedMunro] = useState(null);
@@ -34,7 +34,7 @@ const MunroList = ({munros}) => {
         </div>
             <List>
             {munrosInList.map(munro => (
-                <MunroItem key={munro.id} munro={munro} onClick={handleMunroClick} />
+                <MunroItem key={munro.id} munro={munro} onClick={handleMunroClick} onAddToHike={onAddToHike}/>
             ))}
         </List>
         {selectedMunro && <MunroDetail munro={selectedMunro} />}
