@@ -33,6 +33,8 @@ const App = () => {
   const addMunroToHike = (newMunro) => {
       if (!munrosToHike.some(munro => munro.id === newMunro.id)) {
           setMunrosToHike([...munrosToHike, newMunro])
+      } else {
+        window.alert(`${newMunro.name} is already in your to hike list!`)
       }
   }
 
