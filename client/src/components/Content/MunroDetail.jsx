@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 import Button from '../Button/button';
 
-const MunroDetail = ({ munro, onAddToHike, showAddToHikeButton=false }) => {
+const MunroDetail = ({ munro, addMunroToHike, showAddToHikeButton=false, toggleFavourite }) => {
+  console.log("Rendering MunroDetail", munro);
     const handleAddToHike = () => {
-        onAddToHike(munro)
+        addMunroToHike(munro)
     }
+
+    const label = munro.favourite
+      ? 'make not favourite' : 'make favourite'
+      console.log(label)
 
   return (
     <Wrapper>
@@ -14,7 +19,10 @@ const MunroDetail = ({ munro, onAddToHike, showAddToHikeButton=false }) => {
       <p>Description: {munro.description}</p>
       {showAddToHikeButton &&
       <Button onClick={handleAddToHike} label="Add to hike list"/>
-}
+      }
+      <p>
+        <Button onClick={toggleFavourite} label={label}/>
+      </p>
     </Wrapper>
   );
 };

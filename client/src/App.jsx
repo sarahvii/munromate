@@ -12,11 +12,11 @@ import { createGlobalStyle } from "styled-components"
 const App = () => {
   const name = "hiker"
   const [munros, setMunros] = useState([])
-  const [munrosToHike, setMunrosToHike] = useState([])
+  // const [munrosToHike, setMunrosToHike] = useState([])
 
   const addMunroToHike = (newMunro) => {
-      if (!munrosToHike.some(munro => munro.id === newMunro.id)) {
-          setMunrosToHike([...munrosToHike, newMunro])
+      if (!munros.some(munro => munro.id === newMunro.id)) {
+          setMunros([...munros, newMunro])
       } else {
         window.alert(`${newMunro.name} is already in your to hike list!`)
       }
@@ -43,7 +43,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home name={name} munros={munros} />} />
         <Route path="/munros" element={<MunroList munros={munros} onAddToHike={addMunroToHike}/>} />
-        <Route path="/tohikelist" element={<ToHikeList munros={munrosToHike} />} />
+        <Route path="/tohikelist" element={<ToHikeList munros={munros} setMunros={setMunros} addMunroToHike={addMunroToHike}/>} />
       </Routes>
     </Router>
   )

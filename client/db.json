@@ -1,25 +1,28 @@
 {
-    "munros": [
+  "munros": [
     {
       "id": 1,
       "name": "Ben Nevis",
       "height": 219,
       "near": "Oban",
-      "description": "blah blah blah blah blah blah blah"
+      "description": "blah blah blah blah blah blah blah",
+      "favourite": false
     },
     {
       "id": 2,
       "name": "Arthurs Seat",
       "height": 20,
       "near": "Edinburgh",
-      "description": "When I move there I'll go up it at least once a month"
-    }, 
+      "description": "When I move there I'll go up it at least once a month",
+      "favourite": false
+    },
     {
-        "id": 3,
-        "name": "Ben Rinnes",
-        "height": 310,
-        "near": "Forres",
-        "description": "Someone once described it as a place they went up with their mum"
-      }
+      "id": 3,
+      "name": "Ben Rinnes",
+      "height": 310,
+      "near": "Forres",
+      "description": "Someone once described it as a place they went up with their mum",
+      "favourite": false
+    }
   ]
 }
