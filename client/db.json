@@ -13,6 +13,13 @@
       "height": 20,
       "near": "Edinburgh",
       "description": "When I move there I'll go up it at least once a month"
-    }
+    }, 
+    {
+        "id": 3,
+        "name": "Ben Rinnes",
+        "height": 310,
+        "near": "Forres",
+        "description": "Someone once descripted as a place they went up with their mum"
+      }
   ]
 }

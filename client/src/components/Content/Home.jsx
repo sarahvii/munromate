@@ -9,15 +9,12 @@ const Home = ({name, munros}) => {
             <Greeting name={name}/>
             <RandomMunro munros={munros}/>
         </Wrapper>
-
     )
 }
 
 // hike to the moon
 
 export default Home;
-
-
 
 const Wrapper = styled.div`
     padding: 1em;
