@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import Button from "../Button/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Home = ({name, munros}) => {
 
     const [randomMunro, setRandomMunro] = useState('')
+
+    useEffect(() => {
+        setRandomMunro(randomMunroSelector());
+      }, []);
 
     const randomMunroSelector = () => {
         const randomIndex = Math.floor(Math.random() * munros.length)
@@ -19,7 +23,7 @@ const Home = ({name, munros}) => {
     return (
         <Wrapper>
             <Title>Hello {name}. Welcome home.</Title>
-            <Paragraph>Is your favourite munro {randomMunroSelector()}?
+            <Paragraph>Is your favourite munro {randomMunro}?
                 <p><Button label="No?" onClick={handleButtonClick} /></p>
             </Paragraph>
             {randomMunro && <Paragraph>How about {randomMunro} instead?</Paragraph>} 

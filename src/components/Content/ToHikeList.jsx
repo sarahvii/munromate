@@ -1,25 +1,37 @@
 import styled from "styled-components";
+import Munro from "./Munro";
 
-const ToHikeList = (munros) => {
+const ToHikeList = ({munros}) => {
     return (
-        <Title>
-            Munros I want to hike
-        </Title>
+        <Wrapper>
+        <Title>Munros I want to hike</Title>
+            <List>
+            {munros.map((munro) => (
+                <Munro key={munro.id} munro={munro} />
+            ))}
+        </List>
+      </Wrapper>
+
     )
 }
 
 export default ToHikeList
 
-const Title = styled.h1`
-    font-size: 1.5em;
-    text-align: center;
-    color: #BF4F74;
-    `
-const Paragraph = styled.div`
-    font-size: 1.5em;
-    text-align: center;
-    color: #BF4F74;
-    `
-const Wrapper = styled.section`
-    padding: 1em;
-    background: papayawhip`
+const Wrapper = styled.div`
+  padding: 1em;
+  text-align: center;
+`;
+
+const Title = styled.h2`
+  color: #333;
+`;
+
+const List = styled.ul`
+  list-style-type: none;
+  padding: 0;
+`;
+
+const ListItem = styled.li`
+  margin: 1em 0;
+`;
+

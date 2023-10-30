@@ -17,11 +17,13 @@ const App = () => {
 
   const munros = [
     {
+      id: 1,
       name: 'Ben Nevis',
       height: 219,
       near: 'Oban'
     },
     {
+      id: 2,
       name: 'Arthurs Seat',
       height: 20,
       near: 'Edinburgh'

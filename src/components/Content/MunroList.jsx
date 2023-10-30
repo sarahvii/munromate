@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import Munro from "./Munro";
 
 const MunroList = ({munros}) => {
     return (
         <Wrapper>
         <Title>Munro List</Title>
             <List>
-            {munros.map((munro, index) => (
-                <ListItem key={index}>{munro.name} ({munro.height}m) - near {munro.near}</ListItem>
+            {munros.map(munro => (
+                <Munro key={munro.id} munro={munro} />
             ))}
         </List>
       </Wrapper>
