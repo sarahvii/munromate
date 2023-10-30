@@ -1,16 +1,28 @@
+import { useState } from "react";
 import styled from "styled-components";
+import MunroDetail from "./MunroDetail";
+import Button from "../Button/button";
 
-const ToHikeList = ({munros}) => {
+const ToHikeList = ({munros, onAddToHike}) => {
+    const [selectedMunro, setSelectedMunro] = useState(null)
+
+    const handleMunroClick = (munro) => {
+        setSelectedMunro(munro)
+    }
+
+
     return (
         <Wrapper>
         <Title>Munros I want to hike</Title>
             <List>
             {munros.map(munro => (
-                <ListItem key={munro.id}>
+                <ListItem key={munro.id} onClick={() => handleMunroClick(munro)}>
                 {munro.name} ({munro.height}m) - near {munro.near}
+                <Button onClick={() => onAddToHike(munro)} label="Add to hike list"/>
                 </ListItem>
             ))}
             </List>
+        {selectedMunro && <MunroDetail munro={selectedMunro} onAddToHike={onAddToHike} />}
       </Wrapper>
 
     )
