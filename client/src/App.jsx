@@ -42,7 +42,7 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home name={name} munros={munros} />} />
-        <Route path="/munros" element={<MunroList munros={munros} onAddToHike={addMunroToHike}/>} />
+        <Route path="/munros" element={<MunroList munros={munros} onAddToHike={addMunroToHike} setMunros={setMunros}/>} />
         <Route path="/tohikelist" element={<ToHikeList munros={munros} setMunros={setMunros} addMunroToHike={addMunroToHike}/>} />
       </Routes>
     </Router>
