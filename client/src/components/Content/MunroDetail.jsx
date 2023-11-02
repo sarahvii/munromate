@@ -10,6 +10,8 @@ const MunroDetail = ({ munro, addMunroToHike, showAddToHikeButton=false, toggleF
     const label = munro.favourite
       ? 'make not favourite' : 'make favourite'
 
+    // TODO: change to star icon
+
   return (
     <Wrapper>
       <h3>{munro.name}</h3>

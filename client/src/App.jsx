@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import NavBar from "./components/NavBar/NavBar"
 import Home from "./components/Content/Home"
@@ -7,6 +6,7 @@ import MunroList from "./components/Content/MunroList"
 import ToHikeList from "./components/Content/ToHikeList"
 import { Helmet } from "react-helmet"
 import { createGlobalStyle } from "styled-components"
+import munroService from './services/munros'
 
 
 const App = () => {
@@ -16,12 +16,8 @@ const App = () => {
 
   // get all munros and add to state
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/munros')
-      .then(response => {
-        setMunros(response.data)
-      })
-  }, [])
+    munroService.getAll().then(setMunros);
+  }, []);
 
   // add munro to hike list and set state
   const addMunroToHike = (munroToHike) => {
@@ -29,6 +25,7 @@ const App = () => {
         setMunrosToHike([...munrosToHike, munroToHike])
     } else {
       window.alert(`${munroToHike.name} is already in your to hike list!`)
+      // change to modal or toast
     }
 }
 
