@@ -2,11 +2,11 @@ import styled from "styled-components";
 import Button from "../Button/button";
 import MunroSummary from "./MunroSummary";
 
-const MunroItem = ({ munro, onClick, onAddToHike, showAddToHikeButton = false }) => {
+const MunroItem = ({ munro, onClick, showAddToHikeButton = false, addMunroToHike }) => {
 
   const handleButtonClick = (event) => {
     event.stopPropagation();
-    onAddToHike(munro);
+    addMunroToHike(munro);
   };
 
   return (

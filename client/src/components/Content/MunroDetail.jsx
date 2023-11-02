@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import Button from '../Button/button';
 
-const MunroDetail = ({ munro, addMunroToHike, showAddToHikeButton=false, toggleFavourite }) => {
-  console.log("Rendering MunroDetail", munro);
-    const handleAddToHike = () => {
+const MunroDetail = ({ munro, addMunroToHike, showAddToHikeButton=false, toggleFavourite}) => {
+    
+  const handleAddToHike = () => {
         addMunroToHike(munro)
     }
 

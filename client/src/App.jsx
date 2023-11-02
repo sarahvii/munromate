@@ -12,16 +12,9 @@ import { createGlobalStyle } from "styled-components"
 const App = () => {
   const name = "hiker"
   const [munros, setMunros] = useState([])
-  // const [munrosToHike, setMunrosToHike] = useState([])
+  const [munrosToHike, setMunrosToHike] = useState([])
 
-  const addMunroToHike = (newMunro) => {
-      if (!munros.some(munro => munro.id === newMunro.id)) {
-          setMunros([...munros, newMunro])
-      } else {
-        window.alert(`${newMunro.name} is already in your to hike list!`)
-      }
-  }
-
+  // get all munros and add to state
   useEffect(() => {
     console.log('effect')
     axios
@@ -33,6 +26,15 @@ const App = () => {
   }, [])
   console.log('render', munros.length, 'munros')
 
+  // add munro to hike list and set state
+  const addMunroToHike = (munroToHike) => {
+    if (!munrosToHike.some(munro => munro.id === munroToHike.id)) {
+        setMunrosToHike([...munrosToHike, munroToHike])
+    } else {
+      window.alert(`${munroToHike.name} is already in your to hike list!`)
+    }
+}
+
   return (
     <Router>
       <Helmet>
@@ -42,8 +44,8 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home name={name} munros={munros} />} />
-        <Route path="/munros" element={<MunroList munros={munros} onAddToHike={addMunroToHike} setMunros={setMunros}/>} />
-        <Route path="/tohikelist" element={<ToHikeList munros={munros} setMunros={setMunros} addMunroToHike={addMunroToHike}/>} />
+        <Route path="/munros" element={<MunroList munros={munros} addMunroToHike={addMunroToHike} setMunros={setMunros}/>} />
+        <Route path="/tohikelist" element={<ToHikeList munros={munros} setMunros={setMunros} munrosToHike={munrosToHike} />} />
       </Routes>
     </Router>
   )

@@ -6,7 +6,7 @@
       "height": 219,
       "near": "Oban",
       "description": "blah blah blah blah blah blah blah",
-      "favourite": false
+      "favourite": true
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "height": 20,
       "near": "Edinburgh",
       "description": "When I move there I'll go up it at least once a month",
-      "favourite": true
+      "favourite": false
     },
     {
       "id": 3,

@@ -5,24 +5,17 @@ import MunroDetail from "./MunroDetail";
 import MunroItem from "./MunroItem";
 import SearchBar from "./SearchBar";
 
-const ToHikeList = ({munros, addMunroToHike, setMunros}) => {
-    const [munrosToHike, setMunrosToHike] = useState(munros)
+const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike}) => {
+    const [munrosInFilteredList, setMunrosInFilteredList] = useState(munrosToHike)
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedMunro, setSelectedMunro] = useState(null);
 
     useEffect(() => {
-        const filteredMunros = munros.filter(munro =>
-            munro.name.toLowerCase().includes(searchTerm.toLowerCase())
+      const filteredMunros = munrosToHike.filter(munro =>
+          munro.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    setMunrosToHike(filteredMunros)
-    }, [searchTerm, munros])
-
-    useEffect(() => {
-      if (selectedMunro) {
-        const updatedMunro = munros.find(m => m.id === selectedMunro.id);
-        setSelectedMunro(updatedMunro);
-      }
-    }, [munros]);
+    setMunrosInFilteredList(filteredMunros)
+    }, [searchTerm, munrosToHike])
     
 
     const handleSearchChange = (event) => {
@@ -33,21 +26,23 @@ const ToHikeList = ({munros, addMunroToHike, setMunros}) => {
         setSelectedMunro(munro);
       };
 
+
     const toggleFavouriteOf = (id) => {
       const url = `http://localhost:3001/munros/${id}`
-      const munro = munros.find(m => m.id === id)
-      const changedMunro = {...munro, favourite: !munro.favourite}
-
-      axios.put(url, changedMunro)
+      const munroToUpdate = munros.find(m => m.id === id)
+      const updatedMunro = {...munroToUpdate, favourite: !munroToUpdate.favourite}
+  
+      axios.put(url, updatedMunro)
         .then(response => {
-          console.log('Server Response:', response.data);
           const updatedMunros = munros.map(m => m.id !== id ? m : response.data)
           setMunros(updatedMunros)
-          console.log("Updated Munros", updatedMunros);
-      })
-      .catch(error => {
-        console.error('Error updating favouriteness of munro', error)
-      })
+          if (selectedMunro && selectedMunro.id === id) {
+            setSelectedMunro(response.data);
+          }
+        })
+        .catch(error => {
+          console.error('Error updating favouriteness of munro', error)
+        })
     }
 
     return (
@@ -55,12 +50,13 @@ const ToHikeList = ({munros, addMunroToHike, setMunros}) => {
         <Title>Munros I want to hike</Title>
         <SearchBar value={searchTerm} onChange={handleSearchChange} />
             <List>
-            {munrosToHike.map(munro => (
+            {munrosInFilteredList.map(munro => (
                 <MunroItem
                   key={munro.id}
                   munro={munro}
                   onClick={handleMunroClick}
-                  toggleFavourite={() => toggleFavouriteOf(munro.id)}
+                  toggleFavourite={() => toggleFavouriteOf(munro.id)
+                  }
                 />
             ))}
             </List>
