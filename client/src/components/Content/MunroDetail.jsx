@@ -34,4 +34,5 @@ const Wrapper = styled.div`
   border: 1px solid #ccc;
   padding: 1em;
   margin-top: 1em;
+  color: orange
 `;

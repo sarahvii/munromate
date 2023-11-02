@@ -31,9 +31,13 @@ const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike}) => {
   };
 
     return (
+        <MainContent>
+          <TopSection>
+            <Title>Munros I want to hike</Title>
+            <SearchBar value={searchTerm} onChange={handleSearchChange} />
+          </TopSection>
         <Wrapper>
-        <Title>Munros I want to hike</Title>
-        <SearchBar value={searchTerm} onChange={handleSearchChange} />
+          <LeftSideWrapper> 
             <List>
             {munrosInFilteredList.map(munro => (
                 <MunroItem
@@ -45,6 +49,8 @@ const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike}) => {
                 />
             ))}
             </List>
+          </LeftSideWrapper>
+          <RightSideWrapper>
         {selectedMunro && (
           <MunroDetail 
             key={selectedMunro.id}
@@ -52,16 +58,32 @@ const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike}) => {
             addMunroToHike={addMunroToHike} 
             toggleFavourite={() => toggleFavouriteOf(selectedMunro.id)}/>
           )}
+          </RightSideWrapper>
       </Wrapper>
-
+      </MainContent>
     )
 }
 
 export default ToHikeList
 
+const MainContent = styled.div`
+    padding-top: 60px;`
+
 const Wrapper = styled.div`
-  padding: 1em;
-  text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 10em;
+    text-align: center;
+`;
+
+const TopSection = styled.div`
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em;
+    background: #f0f0f0; 
 `;
 
 const Title = styled.h2`
@@ -71,5 +93,17 @@ const Title = styled.h2`
 const List = styled.ul`
   list-style-type: none;
   padding: 0;
+`;
+
+const LeftSideWrapper = styled.div`
+    max-width: 50%;
+    width: 45%;
+    text-align: left;
+`;
+
+const RightSideWrapper = styled.div`
+    max-width: 50%;
+    width: 45%;
+    text-align: left;
 `;
 
