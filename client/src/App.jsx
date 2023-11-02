@@ -16,15 +16,12 @@ const App = () => {
 
   // get all munros and add to state
   useEffect(() => {
-    console.log('effect')
     axios
       .get('http://localhost:3001/munros')
       .then(response => {
-        console.log("promise fulfilled")
         setMunros(response.data)
       })
   }, [])
-  console.log('render', munros.length, 'munros')
 
   // add munro to hike list and set state
   const addMunroToHike = (munroToHike) => {

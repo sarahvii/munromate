@@ -9,7 +9,6 @@ const MunroDetail = ({ munro, addMunroToHike, showAddToHikeButton=false, toggleF
 
     const label = munro.favourite
       ? 'make not favourite' : 'make favourite'
-      console.log(label)
 
   return (
     <Wrapper>
