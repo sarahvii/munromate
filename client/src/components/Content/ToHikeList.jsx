@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import MunroDetail from "./MunroDetail";
 import MunroItem from "./MunroItem";
 import SearchBar from "./SearchBar";
+import ToggleFavourite from "./ToggleFavourite.jsx";
 
 const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike}) => {
     const [munrosInFilteredList, setMunrosInFilteredList] = useState(munrosToHike)
@@ -26,24 +26,9 @@ const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike}) => {
         setSelectedMunro(munro);
       };
 
-
     const toggleFavouriteOf = (id) => {
-      const url = `http://localhost:3001/munros/${id}`
-      const munroToUpdate = munros.find(m => m.id === id)
-      const updatedMunro = {...munroToUpdate, favourite: !munroToUpdate.favourite}
-  
-      axios.put(url, updatedMunro)
-        .then(response => {
-          const updatedMunros = munros.map(m => m.id !== id ? m : response.data)
-          setMunros(updatedMunros)
-          if (selectedMunro && selectedMunro.id === id) {
-            setSelectedMunro(response.data);
-          }
-        })
-        .catch(error => {
-          console.error('Error updating favouriteness of munro', error)
-        })
-    }
+      ToggleFavourite(id, setMunros, munros, selectedMunro, setSelectedMunro);
+  };
 
     return (
         <Wrapper>
