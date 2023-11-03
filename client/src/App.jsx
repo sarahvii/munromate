@@ -19,7 +19,7 @@ const GlobalStyles = createGlobalStyle`
 
 const App = () => {
   const name = "hiker"
-  const [munros, setMunros] = useState([])
+  const [munros, setMunros] = useState(null)
   const [munrosToHike, setMunrosToHike] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
@@ -28,6 +28,10 @@ const App = () => {
   useEffect(() => {
     munroService.getAll().then(setMunros);
   }, []);
+
+  if (!munros) {
+    return null
+  }
   
   // add munro to hike list and set state
   const addMunroToHike = (munroToHike) => {
