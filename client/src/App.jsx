@@ -7,12 +7,21 @@ import ToHikeList from "./components/Content/ToHikeList"
 import { Helmet } from "react-helmet"
 import { createGlobalStyle } from "styled-components"
 import munroService from './services/munros'
+import Notification from "./components/Notification/Notification";
 
+const GlobalStyles = createGlobalStyle`
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+`;
 
 const App = () => {
   const name = "hiker"
   const [munros, setMunros] = useState([])
   const [munrosToHike, setMunrosToHike] = useState([])
+  const [errorMessage, setErrorMessage] = useState('there has been an error..')
 
   // get all munros and add to state
   useEffect(() => {
@@ -24,12 +33,25 @@ const App = () => {
     if (!munrosToHike.some(munro => munro.id === munroToHike.id)) {
         setMunrosToHike([...munrosToHike, munroToHike])
     } else {
-      window.alert(`${munroToHike.name} is already in your to hike list!`)
-      // change to modal or toast
+      setErrorMessage(
+        `${munroToHike.name} is already in your to hike list!`
+      )
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
 }
 
+  // remove munro from to hike list and update state
+  const removeMunroFromHike = (munroToRemove) => {
+    setMunrosToHike(munrosToHike.filter(munro => munro.id !== munroToRemove.id));
+  };
+  
+
+
   return (
+    <>
+    <Notification message={errorMessage} />
     <Router>
       <Helmet>
         <link href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap' rel="stylesheet" />
@@ -39,18 +61,11 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home name={name} munros={munros} />} />
         <Route path="/munros" element={<MunroList munros={munros} addMunroToHike={addMunroToHike} setMunros={setMunros}/>} />
-        <Route path="/tohikelist" element={<ToHikeList munros={munros} setMunros={setMunros} munrosToHike={munrosToHike} />} />
+        <Route path="/tohikelist" element={<ToHikeList munros={munros} setMunros={setMunros} munrosToHike={munrosToHike} removeMunroFromHike={removeMunroFromHike}/>} />
       </Routes>
     </Router>
+    </>
   )
 }
 
 export default App
-
-const GlobalStyles = createGlobalStyle`
-  body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-`;

@@ -5,7 +5,7 @@ import MunroItem from "./MunroItem";
 import SearchBar from "./SearchBar";
 import ToggleFavourite from "./ToggleFavourite.jsx";
 
-const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike}) => {
+const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike, removeMunroFromHike}) => {
     const [munrosInFilteredList, setMunrosInFilteredList] = useState(munrosToHike)
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedMunro, setSelectedMunro] = useState(null);
@@ -25,6 +25,10 @@ const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike}) => {
     const handleMunroClick = (munro) => {
         setSelectedMunro(munro);
       };
+    
+    const handleRemoveClick = (munro) => {
+        removeMunroFromHike(munro);
+      };
 
     const toggleFavouriteOf = (id) => {
       ToggleFavourite(id, setMunros, munros, selectedMunro, setSelectedMunro);
@@ -40,13 +44,16 @@ const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike}) => {
           <LeftSideWrapper> 
             <List>
             {munrosInFilteredList.map(munro => (
+              <div key={munro.id}>
                 <MunroItem
-                  key={munro.id}
                   munro={munro}
                   onClick={handleMunroClick}
+                  showRemoveButton={true}
+                  removeMunroFromHike={removeMunroFromHike}
                   toggleFavourite={() => toggleFavouriteOf(munro.id)
                   }
                 />
+              </div>
             ))}
             </List>
           </LeftSideWrapper>

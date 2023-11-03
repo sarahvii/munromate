@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const Button = ({ label, onClick }) => {
+const Button = ({ label, onClick, variant }) => {
   return (
-    <StyledButton onClick={onClick}>
+    <StyledButton onClick={onClick} $variant={variant}>
       {label}
     </StyledButton>
   );
@@ -27,4 +27,14 @@ const StyledButton = styled.button`
     background-color: orange;
     color: black;
     }
+
+    ${props => props.variant === 'remove' && css`
+    background-color: red;
+    color: white;
+
+    &:hover {
+      background-color: darkred;
+      color: white;
+    }
+  `}
 `;

@@ -2,18 +2,24 @@ import styled from "styled-components";
 import Button from "../Button/button";
 import MunroSummary from "./MunroSummary";
 
-const MunroItem = ({ munro, onClick, showAddToHikeButton = false, addMunroToHike }) => {
+const MunroItem = ({ munro, onClick, showAddToHikeButton = false, addMunroToHike, showRemoveButton = false, removeMunroFromHike }) => {
 
-  const handleButtonClick = (event) => {
+  const handleAddButtonClick = (event) => {
     event.stopPropagation();
     addMunroToHike(munro);
+  };
+
+  const handleRemoveButtonClick = (event) => {
+    event.stopPropagation();
+    removeMunroFromHike(munro);
   };
 
   return (
     <>
     <ListItem onClick={() => onClick(munro)}>
       <MunroSummary munro={munro} />
-      {showAddToHikeButton && <Button onClick={handleButtonClick} label="Add to hike list" />}
+      {showAddToHikeButton && <Button onClick={handleAddButtonClick} label="Add to hike list" variant="add"/>}
+      {showRemoveButton && <Button onClick={handleRemoveButtonClick} label="Remove" variant="remove" />}
     </ListItem>
     </>
   );
