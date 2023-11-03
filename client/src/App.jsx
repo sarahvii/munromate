@@ -39,7 +39,7 @@ const App = () => {
         setErrorMessage(null)
         setTimeout(() => {
           setSuccessMessage(null)
-        }, 5000)
+        }, 4000)
     } else {
       setErrorMessage(
         `${munroToHike.name} is already in your to hike list!`
@@ -47,15 +47,23 @@ const App = () => {
       setSuccessMessage(null)
       setTimeout(() => {
         setErrorMessage(null)
-      }, 5000)
+      }, 4000)
     }
 }
 
   // remove munro from to hike list and update state
   const removeMunroFromHike = (munroToRemove) => {
+    const isRemoved = munrosToHike.some(munro => munro.id === munroToRemove.id);
     setMunrosToHike(munrosToHike.filter(munro => munro.id !== munroToRemove.id));
+    if (isRemoved) {
+      setSuccessMessage(
+        `${munroToRemove.name} has been removed from your list.`
+      );
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 4000);
+    }
   };
-  
 
 
   return (

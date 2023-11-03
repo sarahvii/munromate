@@ -10,6 +10,8 @@ const MunroDetail = ({ munro, addMunroToHike, showAddToHikeButton=false, toggleF
     const label = munro.favourite
       ? '★' : '☆'
 
+    // TODO change to SVG star or fontawesome
+
 
   return (
     <Wrapper>
