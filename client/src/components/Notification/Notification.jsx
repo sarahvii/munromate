@@ -1,15 +1,27 @@
 import styled, { keyframes } from "styled-components";
 
-const Notification = ({ message }) => {
-  if (message === null) {
+const Notification = ({ errorMessage, successMessage }) => {
+  let message = null;
+  let messageType = null;
+  if (errorMessage) {
+    message = errorMessage;
+    messageType = "error";
+  } else if (successMessage) {
+    message = successMessage;
+    messageType = "success";
+    console.log(`Notification Message: ${message}, Type: ${messageType}`);
+  }
+
+  if (!message) {
     return null;
   }
+
   return (
-    <Toast>
+    <Toast $messageType={messageType}>
       {message}
     </Toast>
   );
-}
+};
 
 export default Notification;
 
@@ -37,7 +49,7 @@ const slideOut = keyframes`
 
 const Toast = styled.div`
   color: white;
-  background: red;
+  background: ${({ $messageType }) => ($messageType === "error" ? "red" : "green")};
   font-size: 16px;
   border-radius: 5px;
   padding: 20px;
@@ -49,9 +61,10 @@ const Toast = styled.div`
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 
   &:before {
-    content: "⚠️";
+    content: ${({ $messageType }) => ($messageType === "error" ? '"⚠️"' : '"✅"')};
     display: inline-block;
     margin-right: 12px;
   }
 `;
+
 
