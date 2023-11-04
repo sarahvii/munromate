@@ -26,9 +26,9 @@ const ToHikeList = ({munros, addMunroToHike, setMunros, munrosToHike, removeMunr
         setSelectedMunro(munro);
       };
     
-    const handleRemoveClick = (munro) => {
-        removeMunroFromHike(munro);
-      };
+    // const handleRemoveClick = (munro) => {
+    //     removeMunroFromHike(munro);
+    //   };
 
     const toggleFavouriteOf = (id) => {
       ToggleFavourite(id, setMunros, munros, selectedMunro, setSelectedMunro);
