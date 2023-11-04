@@ -29,8 +29,22 @@ app.get('/', (request, response) => {
     response.send('<h1>Hello Hiker!</h1>')
 })
 
+// get all munros
 app.get('/api/munros', (request, response) => {
     response.json(munros)
+})
+
+// get individual resource
+app.get('/api/munros/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const munro = munros.find(munro => munro.id === id)
+
+    if (munro) {
+        response.json(munro)
+    } else {
+        response.status(404).end()
+    }
+
 })
 
 const PORT = 3001
