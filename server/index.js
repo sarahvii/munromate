@@ -44,7 +44,14 @@ app.get('/api/munros/:id', (request, response) => {
     } else {
         response.status(404).end()
     }
+})
 
+// delete individual resource
+app.delete('/api/munros/:id', (request, response) => {
+    const id = Number(request.params.id)
+    munros = munros.filter(munro => munro.id !== id)
+
+    response.status(204).end()
 })
 
 const PORT = 3001
