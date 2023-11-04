@@ -1,8 +1,10 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
+const cors = require('cors')
 
 app.use(morgan('tiny'))
+app.use(cors())
 
 let munros = [
     {
