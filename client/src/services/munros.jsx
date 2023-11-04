@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = 'http://localhost:3001/munros'
+const baseUrl = 'http://localhost:3001/api/munros'
 
 // get
 const getAll = () => {

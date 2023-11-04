@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Button from "../Button/button";
+import Button from "../Button/Button";
 import { useState, useEffect } from "react";
 
 const RandomMunro = ({ munros }) => {
