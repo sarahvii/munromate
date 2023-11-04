@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import MunroDetail from "./MunroDetail";
-import Button from "../Button/button";
+import Button from "../Button/Button";
 
 const ToHikeList = ({munros, onAddToHike}) => {
     const [munrosToHike, setMunrosInList] = useState(munros)

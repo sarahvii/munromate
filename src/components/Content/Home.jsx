@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Button from "../Button/button";
+import Button from "../Button/Button";
 import Greeting from "./Greeting";
 import RandomMunro from "./RandomMunro";
 
