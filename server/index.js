@@ -8,57 +8,8 @@ const Munro = require('./models/munro')
 app.use(morgan('tiny'))
 app.use(cors())
 app.use(express.static('dist'))
+app.use(express.json())
 
-let munros = [
-    {
-      id: 1,
-      name: "Ben Nevis",
-      height: 1203,
-      near: "Glasgow",
-      favourite: false
-    },
-    {
-      id: 2,
-      name: "Cluny Hill",
-      height: 123,
-      near: "Forres",
-      important: true
-    },
-    {
-      id: 3,
-      name: "Everest",
-      height: 9867,
-      near: "Kathmandu",
-      important: false
-    }
-  ]
-
-//   if (process.argv.length<3) {
-//     console.log('give password as argument')
-//     process.exit(1)
-//   }
-
-
-
-
-// const munro = new Munro({
-//   name: 'Fantasy Munro',
-//   height: 1000000,
-//   near: 'The Moon',
-//   important: true,
-// })
-
-// munro.save().then(result => {
-//   console.log('munro saved!')
-//   mongoose.connection.close()
-// })
-
-// Munro.find({}).then(result => {
-//     result.forEach(munro => {
-//       console.log(munro)
-//     })
-//     mongoose.connection.close()
-//   })
 
 app.get('/', (request, response) => {
     response.send('<h1>Hello Hiker!</h1>')
@@ -74,22 +25,42 @@ app.get('/api/munros', (request, response) => {
 
 // get individual resource
 app.get('/api/munros/:id', (request, response) => {
-    const id = Number(request.params.id)
-    const munro = munros.find(munro => munro.id === id)
-
-    if (munro) {
+    Munro.findById(request.params.id).then(munro => {
         response.json(munro)
-    } else {
-        response.status(404).end()
-    }
+    })
 })
 
 // delete individual resource
 app.delete('/api/munros/:id', (request, response) => {
-    const id = Number(request.params.id)
-    munros = munros.filter(munro => munro.id !== id)
+    Munro.findByIdAndRemove(request.params.id)
+        .then(result => {
+            if (result) {
+                response.status(204).end();
+            } else {
+                response.status(404).end();
+            }
+        })
+        .catch(error => next(error));
+    })
 
-    response.status(204).end()
+// create new munro
+app.post('/api/munros', (request, response) => {
+    const body = request.body
+
+    if (body.name === undefined) {
+        return response.status(400).json({error: 'name missing'})
+    }
+
+    const munro = new Munro({
+        name: body.name,
+        height: body.height,
+        near: body.near,
+        important: body.important || false,
+        })
+
+    munro.save().then(savedMunro => {
+        response.json(savedMunro)
+    })
 })
 
 const unknownEndpoint = (request, response) => {

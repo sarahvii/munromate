@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/munros
+Content-Type: application/json
+
+{
+    "name": "Really big hill",
+    "near": "London",
+    "favourite": false
+}
