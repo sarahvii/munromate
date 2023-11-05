@@ -1,8 +1,9 @@
+require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
 const cors = require('cors')
-const mongoose = require('mongoose')
+const Munro = require('./models/munro')
 
 app.use(morgan('tiny'))
 app.use(cors())
@@ -32,35 +33,11 @@ let munros = [
     }
   ]
 
-  if (process.argv.length<3) {
-    console.log('give password as argument')
-    process.exit(1)
-  }
-  
-  const password = process.argv[2]
-  
-  const url =
-    `mongodb+srv://munromateuser:${password}@munromate.k8t7iak.mongodb.net/munroApp?retryWrites=true&w=majority`
-  
-  mongoose.set('strictQuery',false)
-  mongoose.connect(url)
-  
-  const munroSchema = new mongoose.Schema({
-    name: String,
-    height: Number,
-    near: String,
-    important: Boolean
-  })
+//   if (process.argv.length<3) {
+//     console.log('give password as argument')
+//     process.exit(1)
+//   }
 
-  munroSchema.set('toJSON', {
-    transform: (document, returnedObject) => {
-      returnedObject.id = returnedObject._id.toString()
-      delete returnedObject._id
-      delete returnedObject.__v
-    }
-  })
-  
-  const Munro = mongoose.model('Munro', munroSchema)
 
 
 
