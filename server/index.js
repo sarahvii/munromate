@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 const cors = require('cors')
+const mongoose = require('mongoose')
 
 app.use(morgan('tiny'))
 app.use(cors())
@@ -31,13 +32,67 @@ let munros = [
     }
   ]
 
+  if (process.argv.length<3) {
+    console.log('give password as argument')
+    process.exit(1)
+  }
+  
+  const password = process.argv[2]
+  
+  const url =
+    `mongodb+srv://munromateuser:${password}@munromate.k8t7iak.mongodb.net/munroApp?retryWrites=true&w=majority`
+  
+  mongoose.set('strictQuery',false)
+  mongoose.connect(url)
+  
+  const munroSchema = new mongoose.Schema({
+    name: String,
+    height: Number,
+    near: String,
+    important: Boolean
+  })
+
+  munroSchema.set('toJSON', {
+    transform: (document, returnedObject) => {
+      returnedObject.id = returnedObject._id.toString()
+      delete returnedObject._id
+      delete returnedObject.__v
+    }
+  })
+  
+  const Munro = mongoose.model('Munro', munroSchema)
+
+
+
+// const munro = new Munro({
+//   name: 'Fantasy Munro',
+//   height: 1000000,
+//   near: 'The Moon',
+//   important: true,
+// })
+
+// munro.save().then(result => {
+//   console.log('munro saved!')
+//   mongoose.connection.close()
+// })
+
+// Munro.find({}).then(result => {
+//     result.forEach(munro => {
+//       console.log(munro)
+//     })
+//     mongoose.connection.close()
+//   })
+
 app.get('/', (request, response) => {
     response.send('<h1>Hello Hiker!</h1>')
 })
 
 // get all munros
 app.get('/api/munros', (request, response) => {
-    response.json(munros)
+    Munro.find({}).then(munros => {
+        response.json(munros)
+    })
+
 })
 
 // get individual resource
