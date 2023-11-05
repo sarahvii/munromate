@@ -7,7 +7,7 @@ const url = process.env.MONGODB_URI
 console.log('connecting to ', url)
 
 mongoose.connect(url)
-    .then(result => {
+    .then(result => {   
         console.log('connected to MongoDB')
     })
     .catch((error) => {
@@ -18,7 +18,7 @@ const munroSchema = new mongoose.Schema({
     name: String,
     height: Number,
     near: String,
-    important: Boolean
+    favourite: Boolean
     })
 
 munroSchema.set('toJSON', {

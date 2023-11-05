@@ -10,7 +10,6 @@ app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
 
-
 app.get('/', (request, response) => {
     response.send('<h1>Hello Hiker!</h1>')
 })
@@ -40,7 +39,6 @@ app.delete('/api/munros/:id', (request, response) => {
                 response.status(404).end();
             }
         })
-        .catch(error => next(error));
     })
 
 // create new munro
@@ -55,11 +53,32 @@ app.post('/api/munros', (request, response) => {
         name: body.name,
         height: body.height,
         near: body.near,
-        important: body.important || false,
+        favourite: body.important || false,
         })
 
     munro.save().then(savedMunro => {
         response.json(savedMunro)
+    })
+})
+
+// update a munro
+app.put('/api/munros/:id', (request, response) => {
+    const body = request.body
+
+    const munro = {
+        name: body.name,
+        height: body.height,
+        near: body.near,
+        favourite: body.favourite || false,
+    };
+
+    Munro.findByIdAndUpdate(request.params.id, munro, { new: true })
+    .then(updatedMunro => {
+        if (updatedMunro) {
+            response.json(updatedMunro);
+        } else {
+            response.status(404).end();
+        }
     })
 })
 
