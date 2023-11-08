@@ -4,5 +4,5 @@ Content-Type: application/json
 {
     "name": "Really really really really really big hill",
     "near": "Barcelona",
-    "favourite": false
+    "favourite": "yes"
 }
