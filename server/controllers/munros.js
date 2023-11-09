@@ -34,6 +34,7 @@ munrosRouter.post('/', (request, response, next) => {
         height: body.height,
         near: body.near,
         favourite: body.favourite || false,
+        description: body.description,
         img: body.img,
         })
 

@@ -9,6 +9,7 @@ const munroSchema = new mongoose.Schema({
     height: Number,
     near: String,
     favourite: Boolean,
+    description: String,
     img: String
     })
 

@@ -6,7 +6,8 @@ Content-Type: application/json
     "height": 1345,
     "near": "Fort William",
     "favourite": true,
-    "img": "https://en.wikipedia.org/wiki/Ben_Nevis#/media/File:BenNevis2005.jpg"
+    "description": "Ben Nevis (Beinn Nibheis) is the highest mountain in Scotland, the United Kingdom and the British Isles. The summit is 1,345 metres (4,413 ft)[1] above sea level and is the highest land in any direction for 739 kilometres (459 miles).[3][a] Ben Nevis stands at the western end of the Grampian Mountains in the Highland region of Lochaber, close to the town of Fort William.",
+    "img": "https://upload.wikimedia.org/wikipedia/commons/0/09/BenNevis2005.jpg"
 }
 
 # {
