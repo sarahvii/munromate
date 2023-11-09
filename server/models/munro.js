@@ -8,7 +8,8 @@ const munroSchema = new mongoose.Schema({
     },
     height: Number,
     near: String,
-    favourite: Boolean
+    favourite: Boolean,
+    img: String
     })
 
 munroSchema.set('toJSON', {

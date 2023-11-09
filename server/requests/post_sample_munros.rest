@@ -1,0 +1,16 @@
+POST http://localhost:3001/api/munros
+Content-Type: application/json
+
+{
+    "name": "Ben Nevis",
+    "height": 1345,
+    "near": "Fort William",
+    "favourite": true,
+    "img": "https://en.wikipedia.org/wiki/Ben_Nevis#/media/File:BenNevis2005.jpg"
+}
+
+# {
+#     "name": "Ben Madui"
+# }
+
+

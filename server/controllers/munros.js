@@ -33,7 +33,8 @@ munrosRouter.post('/', (request, response, next) => {
         name: body.name,
         height: body.height,
         near: body.near,
-        favourite: body.important || false,
+        favourite: body.favourite || false,
+        img: body.img,
         })
 
     munro.save().then(savedMunro => {
@@ -75,7 +76,5 @@ munrosRouter.put('/:id', (request, response, next) => {
     })
 })
 
-
-
-  module.exports = munrosRouter
+module.exports = munrosRouter
   
