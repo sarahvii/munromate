@@ -1,3 +1,12 @@
+# MunroMate v2 - full stack
+
+A work in progress!  Current version deployed at https://munromate.fly.dev/
+- React
+- Express
+- Node.js
+- MongoDB
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
