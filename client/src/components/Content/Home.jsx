@@ -8,7 +8,7 @@ const Home = ({name, munros}) => {
         <MainContent>
         <Wrapper>
             <Greeting name={name}/>
-            <RandomMunro munros={munros}/>
+            {/* <RandomMunro munros={munros}/> */}
         </Wrapper>
         </MainContent>
     )

@@ -19,6 +19,7 @@ const MunroDetail = ({ munro, addMunroToHike, showAddToHikeButton=false, toggleF
       <p>Height: {munro.height} meters</p>
       <p>Near: {munro.near}</p>
       <p>Description: {munro.description}</p>
+      <img src={munro.img}/>
       {showAddToHikeButton &&
       <Button onClick={handleAddToHike} label="Add to hike list"/>
       }
@@ -32,8 +33,13 @@ const MunroDetail = ({ munro, addMunroToHike, showAddToHikeButton=false, toggleF
 export default MunroDetail;
 
 const Wrapper = styled.div`
-  border: 1px solid #ccc;
+  border: 1px solid #000;
   padding: 1em;
   margin-top: 1em;
-  color: orange
+  color: orange;
+  img {
+    max-width: 100%;
+    height: auto;   
+    border: 1px solid #000;  
+  }
 `;
