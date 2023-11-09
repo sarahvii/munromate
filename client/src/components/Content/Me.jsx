@@ -4,7 +4,7 @@ import poonhill from '../../assets/poonhill.jpeg'
 const Me = () => (
   <>
   <StyledImage src={poonhill} alt="Me up a big hill (not a munro)"/>
-  <Para>Me up a big hill (not a munro).</Para>
+  <Para>{`In the meantime, here's me up a big hill (not a munro).`}</Para>
   </>
 );
 
