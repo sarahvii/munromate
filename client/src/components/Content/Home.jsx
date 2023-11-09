@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Greeting from "./Greeting";
 import RandomMunro from "./RandomMunro";
+import Me from "./Me";
 
 const Home = ({name, munros}) => {
 
@@ -9,6 +10,7 @@ const Home = ({name, munros}) => {
         <Wrapper>
             <Greeting name={name}/>
             {/* <RandomMunro munros={munros}/> */}
+            <Me/>
         </Wrapper>
         </MainContent>
     )
