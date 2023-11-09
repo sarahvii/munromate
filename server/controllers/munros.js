@@ -60,12 +60,14 @@ munrosRouter.delete('/:id', (request, response, next) => {
 munrosRouter.put('/:id', (request, response, next) => {
     const body = request.body
 
-    const munro = {
+    const munro = new Munro({
         name: body.name,
         height: body.height,
         near: body.near,
         favourite: body.favourite || false,
-    };
+        description: body.description,
+        img: body.img,
+        })
 
     Munro.findByIdAndUpdate(request.params.id, munro, { new: true })
     .then(updatedMunro => {
