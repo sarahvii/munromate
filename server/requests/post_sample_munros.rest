@@ -1,17 +1,94 @@
 POST http://localhost:3001/api/munros
 Content-Type: application/json
 
-{
-    "name": "Ben Nevis",
-    "height": 1345,
-    "near": "Fort William",
-    "favourite": true,
-    "description": "Ben Nevis (Beinn Nibheis) is the highest mountain in Scotland, the United Kingdom and the British Isles. The summit is 1,345 metres (4,413 ft)[1] above sea level and is the highest land in any direction for 739 kilometres (459 miles).[3][a] Ben Nevis stands at the western end of the Grampian Mountains in the Highland region of Lochaber, close to the town of Fort William.",
-    "img": "https://upload.wikimedia.org/wikipedia/commons/0/09/BenNevis2005.jpg"
-}
+# {
+#     "name": "Ben Nevis",
+#     "height": 1345,
+#     "near": "Fort William",
+#     "favourite": true,
+#     "description": "Ben Nevis (Beinn Nibheis) is the highest mountain in Scotland, the United Kingdom and the British Isles. The summit is 1,345 metres (4,413 ft)[1] above sea level and is the highest land in any direction for 739 kilometres (459 miles).[3][a] Ben Nevis stands at the western end of the Grampian Mountains in the Highland region of Lochaber, close to the town of Fort William.",
+#     "img": "https://upload.wikimedia.org/wikipedia/commons/0/09/BenNevis2005.jpg"
+# }
 
 # {
-#     "name": "Ben Madui"
+#     "name": "Ben Macdui",
+#     "height": 1309,
+#     "near": "Cairngorms",
+#     "favourite": false,
+#     "description": "Ben Macdui (Beinn MacDuibh) is the second-highest mountain in Scotland and all of the British Isles, after Ben Nevis, and the highest of the Cairngorm Mountains. The summit is 1,309 metres (4,295 ft) above sea level and it is classed as a Munro. Ben Macdui sits on the southwestern edge of the Cairngorm plateau, overlooking the Lairig Ghru pass to the west, and Loch Etchachan to the east. It lies on the boundary between the historic counties of Aberdeenshire and Banffshire.",
+#     "img": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Ben_Macdui_-_geograph.org.uk_-_3477292.jpg"
+# }
+
+# {
+#     "name": "Braeriach",
+#     "height": 1296,
+#     "near": "Cairngorms",
+#     "favourite": false,
+#     "description": "Braeriach or Brae Riach (Am Bràigh Riabhach) is the third-highest mountain in Scotland and all of the British Isles, after Ben Nevis and Ben Macdui, rising 1,296 metres (4,252 ft) above sea level. It is in the Scottish Highlands and is the highest point in the western massif of the Cairngorms, separated from the central section by the Lairig Ghru pass. The summit is a crescent-shaped plateau, overlooking several corries.",
+#     "img": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Braeriach_and_An_Garbh_Choire_-_geograph.org.uk_-_278991.jpg"
+# }
+
+# {
+#     "name": "Cairn Toul",
+#     "height": 1291,
+#     "near": "Cairngorms",
+#     "favourite": false,
+#     "description": "Cairn Toul (Càrn an t-Sabhail) is the fourth-highest mountain in Scotland and all of the British Isles, after Ben Nevis, Ben Macdui and Braeriach. The summit is 1,291 metres (4,236 feet) above sea level. It is in the western massif of the Cairngorms, linked by a bealach at about 1125 m to Braeriach. The mountain towers above the Lairig Ghru pass.",
+#     "img": "https://upload.wikimedia.org/wikipedia/commons/8/85/Cairn_Toul_-_geograph.org.uk_-_381800.jpg"
+# }
+
+# {
+#     "name": "Sgor an Lochain Uaine",
+#     "height": 1258,
+#     "near": "Cairngorms",
+#     "favourite": false,
+#     "description": "Sgòr an Lochain Uaine (Scottish Gaelic for 'peak of the little green lake') is one of the Cairngorms mountains in the Scottish Highlands. Rising to 1,258 metres (4,127 ft), by some counts it is the fifth-highest mountain in Scotland (and the United Kingdom). It is in the western massif of the Cairngorms, standing between Braeriach and Cairn Toul, overlooking An Garbh Choire and the Lairig Ghru pass. It was promoted to Munro status by the Scottish Mountaineering Club's 1997 revision of the tables.",
+#     "img": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Sgor_an_Lochan_Uaine_from_Ben_Macdui_-_geograph.org.uk_-_3591282.jpg"
+# }
+
+# {
+#     "name": "Cairn Gorm",
+#     "height": 1245,
+#     "near": "Cairngorms",
+#     "favourite": false,
+#     "description": "Cairn Gorm (An Càrn Gorm) is a mountain in the Scottish Highlands. It is part of the Cairngorms range and wider Grampian Mountains. With a summit elevation of 1,244.8 m (4,084 ft) above sea level, Cairn Gorm is classed as a Munro and is the sixth-highest mountain in the British Isles. The high, broad domed summit overlooking Strathspey is one of the most readily identifiable mountains from the nearby town and regional centre of Aviemore. Although it shares its name with the Cairngorm mountains, Ben Macdui is the highest mountain in the range.",
+#     "img": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Stacan_Dubha_-_geograph.org.uk_-_886049.jpg"
+# }
+
+# {
+#     "name": "Aonach Beag",
+#     "height": 1234,
+#     "near": "Fort William",
+#     "favourite": false,
+#     "description": "Aonach Beag is a mountain in the Scottish Highlands. It is located about 3 km east of Ben Nevis on the north side of Glen Nevis, near the town of Fort William. Apart from Ben Nevis, Aonach Beag is the highest peak in the British Isles outwith the Cairngorm mountains of eastern Scotland.",
+#     "img": "https://upload.wikimedia.org/wikipedia/commons/6/68/Aonach_beag.jpg"
+# }
+
+# {
+#     "name": "Aonach Mòr",
+#     "height": 1221,
+#     "near": "Fort William",
+#     "favourite": false,
+#     "description": "Aonach Mòr is a mountain in the Scottish Highlands. It is located about two miles (three kilometres) northeast of Ben Nevis on the south side of Glen Spean, near Fort William. The mountain has a summit elevation of 4,006 ft (1,221 m) and is classified as a Munro.",
+#     "img": "https://upload.wikimedia.org/wikipedia/commons/4/43/Aonachs_from_Banavie.jpg"
+# }
+
+# {
+#     "name": "Càrn Mòr Dearg",
+#     "height": 1220,
+#     "near": "Fort William",
+#     "favourite": false,
+#     "description": "Càrn Mòr Dearg (Scottish Gaelic for 'great red peak') is the ninth-highest mountain in Scotland and the British Isles, with a height of 1,220 metres (4,000 ft). It stands a short distance northeast of Ben Nevis, the highest mountain in Britain, to which it is linked by the 'Càrn Mòr Dearg arête'. Along with Càrn Dearg Meadhanach ('middle red peak') and Càrn Beag Dearg ('little red peak'), it makes up the eastern ridge of the horseshoe-shaped Ben Nevis massif in the Scottish Highlands.",
+#     "img": "https://upload.wikimedia.org/wikipedia/commons/2/23/CMDSummit.jpg"
+# }
+
+# {
+#     "name": "Ben Lawers",
+#     "height": 1214,
+#     "near": "Glen Lyon",
+#     "favourite": false,
+#     "description": "Ben Lawers (Beinn Labhair) is the highest mountain in the Breadalbane region of the Scottish Highlands. It lies north of Loch Tay and is the highest peak of the 'Ben Lawers group', a ridge that includes six other Munros: Beinn Ghlas, Meall Garbh, Meall Corranaich, An Stùc, Meall Greigh and Meall a' Choire Leith.[3] It is also the highest peak in Perthshire,[4] and the tenth highest Munro in Scotland. Ben Lawers was long thought to be over 4000 feet in height; accurate measurement in the 1870s showed it to be 3,983 feet (1,214 m).",
+#     "img": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Ben_Lawers_in_Scotland_-_2008.jpg"
 # }
 
 
