@@ -36,9 +36,12 @@ munrosRouter.post('/', async (request, response, next) => {
         description: body.description,
         img: body.img,
         })
-
+    try {
     const savedMunro = await munro.save()
     response.status(201).json(savedMunro)
+    } catch(exception) {
+        next(exception)
+    }
     })
 
 // delete individual resource

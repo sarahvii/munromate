@@ -5,6 +5,7 @@ const app = require('../app')
 const api = supertest(app)
 
 const Munro = require('../models/munro')
+const munro = require('../models/munro')
 
 beforeEach(async () => {
     await Munro.deleteMany({})
@@ -80,6 +81,38 @@ test('munro without name is not added', async() => {
     const munrosAtEnd = await helper.munrosInDb()
     expect(munrosAtEnd).toHaveLength(helper.initialMunros.length)
 })
+
+test('a specific munro can be viewed', async () => {
+    const munrosAtStart = await helper.munrosInDb()
+
+    const munroToView = munrosAtStart[0]
+
+    const resultMunro = await api
+        .get(`/api/munros/${munroToView.id}`)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+
+    expect(resultMunro.body).toEqual(munroToView)
+})
+
+test('a munro can be deleted', async () => {
+    const munrosAtStart = await helper.munrosInDb()
+    const munroToDelete = munrosAtStart[0]
+
+    await api
+        .delete(`/api/munros/${munroToDelete.id}`)
+        .expect(204)
+
+    const munrosAtEnd = await helper.munrosInDb()
+
+    expect(munrosAtEnd).toHaveLength(
+        helper.initialMunros.length - 1
+    )
+
+    const names = munrosAtEnd.map(r => r.name)
+    expect(names).not.toContain(munroToDelete.name)
+})
+
 
 afterAll(async () => {
     await mongoose.connection.close()
