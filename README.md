@@ -5,7 +5,7 @@ A work in progress!  Current version deployed at https://munromate.fly.dev/
 - Express
 - Node.js
 - MongoDB
-
+- Jest
 
 # React + Vite
 
