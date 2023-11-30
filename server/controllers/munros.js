@@ -8,16 +8,17 @@ munrosRouter.get('/', async (request, response) => {
     });
 
 // get individual resource
-munrosRouter.get('/:id', (request, response, next) => {
-    Munro.findById(request.params.id)
-    .then(munro => {
+munrosRouter.get('/:id', async (request, response, next) => {
+    try {
+        const munro = await Munro.findById(request.params.id)
         if (munro) {
         response.json(munro)
     } else {
         response.status(404).end()
         }
-    })
-    .catch(error => next(error))
+    } catch(exception) {
+        next(exception)
+    }
 })
 
 // create new munro
@@ -44,17 +45,15 @@ munrosRouter.post('/', async (request, response, next) => {
     }
     })
 
-// delete individual resource
-munrosRouter.delete('/:id', (request, response, next) => {
-    Munro.findByIdAndRemove(request.params.id)
-        .then(result => {
-            if (result) {
-                response.status(204).end();
-            } else {
-                response.status(404).end();
+// delete individual munro
+munrosRouter.delete('/:id', async (request, response, next) => {
+    try {
+        await Munro.findByIdAndRemove(request.params.id)
+        response.status(204).end();
+        } catch(exception) {
+            next(exception)
             }
-        })
-    })
+        })  
 
 // update a munro
 munrosRouter.put('/:id', (request, response, next) => {
