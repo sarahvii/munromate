@@ -2,11 +2,10 @@ const munrosRouter = require('express').Router()
 const Munro = require('../models/munro')
 
 // get all munros
-munrosRouter.get('/', (request, response) => {
-    Munro.find({}).then(munros => {
-        response.json(munros)
-    })
-})
+munrosRouter.get('/', async (request, response) => {
+    const munros = await Munro.find({})
+    response.json(munros)
+    });
 
 // get individual resource
 munrosRouter.get('/:id', (request, response, next) => {
@@ -22,7 +21,7 @@ munrosRouter.get('/:id', (request, response, next) => {
 })
 
 // create new munro
-munrosRouter.post('/', (request, response, next) => {
+munrosRouter.post('/', async (request, response, next) => {
     const body = request.body
 
     if (body.name === undefined) {
@@ -38,11 +37,9 @@ munrosRouter.post('/', (request, response, next) => {
         img: body.img,
         })
 
-    munro.save().then(savedMunro => {
-        response.json(savedMunro)
+    const savedMunro = await munro.save()
+    response.status(201).json(savedMunro)
     })
-    .catch(error => next(error))
-})
 
 // delete individual resource
 munrosRouter.delete('/:id', (request, response, next) => {
