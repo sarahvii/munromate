@@ -1,34 +1,18 @@
 const mongoose = require('mongoose')
 const supertest = require('supertest')
+const helper = require('./test_helper')
 const app = require('../app')
 const api = supertest(app)
-const Munro = require('../models/munro')
 
-const initialMunros = [
-    {
-    "name": "Ben Nevis",
-    "height": 1345,
-    "near": "Fort William",
-    "favourite": true,
-    "description": "Ben Nevis (Beinn Nibheis) is the highest mountain in Scotland, the United Kingdom and the British Isles. The summit is 1,345 metres (4,413 ft)[1] above sea level and is the highest land in any direction for 739 kilometres (459 miles).[3][a] Ben Nevis stands at the western end of the Grampian Mountains in the Highland region of Lochaber, close to the town of Fort William.",
-    "img": "https://upload.wikimedia.org/wikipedia/commons/0/09/BenNevis2005.jpg"
-    },
-        
-    {
-    "name": "Ben Macdui",
-    "height": 1309,
-    "near": "Cairngorms",
-    "favourite": false,
-    "description": "Ben Macdui (Beinn MacDuibh) is the second-highest mountain in Scotland and all of the British Isles, after Ben Nevis, and the highest of the Cairngorm Mountains. The summit is 1,309 metres (4,295 ft) above sea level and it is classed as a Munro. Ben Macdui sits on the southwestern edge of the Cairngorm plateau, overlooking the Lairig Ghru pass to the west, and Loch Etchachan to the east. It lies on the boundary between the historic counties of Aberdeenshire and Banffshire.",
-    "img": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Ben_Macdui_-_geograph.org.uk_-_3477292.jpg"
-    }
-]
+const Munro = require('../models/munro')
 
 beforeEach(async () => {
     await Munro.deleteMany({})
-    let munroObject = new Munro(initialMunros[0])
+
+    let munroObject = new Munro(helper.initialMunros[0])
     await munroObject.save()
-    munroObject = new Munro(initialMunros[1])
+
+    munroObject = new Munro(helper.initialMunros[1])
     await munroObject.save()
 })
 
@@ -39,14 +23,10 @@ test('munros are returned as json', async () => {
         .expect('Content-Type', /application\/json/)
 }, 100000)
 
-afterAll(async () => {
-    await mongoose.connection.close()
-})
-
 test('all munros are returned', async () => {
     const response = await api.get('/api/munros')
 
-    expect(response.body).toHaveLength(initialMunros.length)
+    expect(response.body).toHaveLength(helper.initialMunros.length)
 })
 
 test('a specific munro is within the returned munros', async () => {
@@ -56,5 +36,51 @@ test('a specific munro is within the returned munros', async () => {
     expect(contents).toContain(
         "Ben Macdui"
     )
-
 })  
+
+test('a valid munro can be added', async () => {
+    const newMunro = {
+        "name": "Braeriach",
+        "height": 1296,
+        "near": "Cairngorms",
+        "favourite": false,
+        "description": "Braeriach or Brae Riach (Am Bràigh Riabhach) is the third-highest mountain in Scotland and all of the British Isles, after Ben Nevis and Ben Macdui, rising 1,296 metres (4,252 ft) above sea level. It is in the Scottish Highlands and is the highest point in the western massif of the Cairngorms, separated from the central section by the Lairig Ghru pass. The summit is a crescent-shaped plateau, overlooking several corries.",
+        "img": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Braeriach_and_An_Garbh_Choire_-_geograph.org.uk_-_278991.jpg"
+        }
+    
+    await api
+        .post('/api/munros')
+        .send(newMunro)
+        .expect(201)
+        .expect('Content-Type', /application\/json/)
+
+    const munrosAtEnd = await helper.munrosInDb()
+    expect(munrosAtEnd).toHaveLength(helper.initialMunros.length + 1)
+
+    const names = munrosAtEnd.map(n => n.name)
+    expect(names).toContain(
+        'Braeriach'
+    )
+})
+
+test('munro without name is not added', async() => {
+    const newMunro = {
+            "height": 1291,
+            "near": "Cairngorms",
+            "favourite": false,
+            "description": "Cairn Toul (Càrn an t-Sabhail) is the fourth-highest mountain in Scotland and all of the British Isles, after Ben Nevis, Ben Macdui and Braeriach. The summit is 1,291 metres (4,236 feet) above sea level. It is in the western massif of the Cairngorms, linked by a bealach at about 1125 m to Braeriach. The mountain towers above the Lairig Ghru pass.",
+            "img": "https://upload.wikimedia.org/wikipedia/commons/8/85/Cairn_Toul_-_geograph.org.uk_-_381800.jpg"
+            }
+    
+    await api
+        .post('/api/munros')
+        .send(newMunro)
+        .expect(400)
+
+    const munrosAtEnd = await helper.munrosInDb()
+    expect(munrosAtEnd).toHaveLength(helper.initialMunros.length)
+})
+
+afterAll(async () => {
+    await mongoose.connection.close()
+})
