@@ -112,6 +112,13 @@ test('a munro can be deleted', async () => {
   expect(names).not.toContain(munroToDelete.name)
 })
 
+test('munro has an id property', async () => {
+  const munrosAtStart = await helper.munrosInDb();
+  const munroToTest = munrosAtStart[0];
+  
+  expect(munroToTest.id).toBeDefined();
+});
+
 
 afterAll(async () => {
   await mongoose.connection.close()
