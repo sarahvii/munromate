@@ -8,12 +8,12 @@ const Munro = require('../models/munro')
 
 beforeEach(async () => {
   await Munro.deleteMany({})
+  
+  const munroObjects = helper.initialMunros
+    .map(munro => new Munro(munro))
 
-  let munroObject = new Munro(helper.initialMunros[0])
-  await munroObject.save()
-
-  munroObject = new Munro(helper.initialMunros[1])
-  await munroObject.save()
+  const promiseArray = munroObjects.map(munro => munro.save())
+  await Promise.all(promiseArray)
 })
 
 test('munros are returned as json', async () => {
