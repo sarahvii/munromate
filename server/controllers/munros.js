@@ -1,81 +1,70 @@
 const munrosRouter = require('express').Router()
 const Munro = require('../models/munro')
+const mongoose = require('mongoose')
 
 // get all munros
 munrosRouter.get('/', async (request, response) => {
-    const munros = await Munro.find({})
-    response.json(munros)
-    });
+  const munros = await Munro.find({})
+  response.json(munros)
+});
 
 // get individual resource
-munrosRouter.get('/:id', (request, response, next) => {
-    Munro.findById(request.params.id)
-    .then(munro => {
-        if (munro) {
-        response.json(munro)
-    } else {
-        response.status(404).end()
-        }
-    })
-    .catch(error => next(error))
+munrosRouter.get('/:id', async (request, response) => {
+  const munro = await Munro.findById(request.params.id)
+  if (munro) {
+    response.json(munro)
+  } else {
+    response.status(404).end()
+  }
 })
 
 // create new munro
-munrosRouter.post('/', async (request, response, next) => {
-    const body = request.body
+munrosRouter.post('/', async (request, response) => {
+  const body = request.body
 
-    if (body.name === undefined) {
-        return response.status(400).json({error: 'name missing'})
-    }
+  if (!body.name) {
+    return response.status(400).json({ error: 'name missing' })
+  }
 
-    const munro = new Munro({
-        name: body.name,
-        height: body.height,
-        near: body.near,
-        favourite: body.favourite || false,
-        description: body.description,
-        img: body.img,
-        })
-    try {
-    const savedMunro = await munro.save()
-    response.status(201).json(savedMunro)
-    } catch(exception) {
-        next(exception)
-    }
-    })
+  const munro = new Munro({
+    name: body.name,
+    height: body.height,
+    near: body.near,
+    favourite: body.favourite || false,
+    description: body.description,
+    img: body.img,
+  })
 
-// delete individual resource
-munrosRouter.delete('/:id', (request, response, next) => {
-    Munro.findByIdAndRemove(request.params.id)
-        .then(result => {
-            if (result) {
-                response.status(204).end();
-            } else {
-                response.status(404).end();
-            }
-        })
-    })
+  const savedMunro = await munro.save()
+  response.status(201).json(savedMunro)
+})
+
+// delete individual munro
+munrosRouter.delete('/:id', async (request, response) => {
+  await Munro.findByIdAndRemove(request.params.id)
+  response.status(204).end();
+})  
 
 // update a munro
-munrosRouter.put('/:id', (request, response, next) => {
-    const body = request.body
+munrosRouter.put('/:id', (request, response) => {
+  const body = request.body
+  
+  const munro = new Munro({
+    name: body.name,
+    height: body.height,
+    near: body.near,
+    favourite: body.favourite || false,
+    description: body.description,
+    img: body.img,
+  })
 
-    const munro = new Munro({
-        name: body.name,
-        height: body.height,
-        near: body.near,
-        favourite: body.favourite || false,
-        description: body.description,
-        img: body.img,
-        })
-
-    Munro.findByIdAndUpdate(request.params.id, munro, { new: true })
+  Munro.findByIdAndUpdate(request.params.id, munro, { new: true })
     .then(updatedMunro => {
-        if (updatedMunro) {
-            response.json(updatedMunro);
-        } else {
-            response.status(404).end();
-        }
+      if (updatedMunro) {
+        response.json(updatedMunro);
+      } else {
+        response.status(404).end();
+      }
     })
 })
 
