@@ -1,5 +1,6 @@
 const munrosRouter = require('express').Router()
 const Munro = require('../models/munro')
+const mongoose = require('mongoose')
 
 // get all munros
 munrosRouter.get('/', async (request, response) => {
